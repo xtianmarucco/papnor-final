@@ -133,15 +133,14 @@ $(document).ready(function ($) {
         var name = formData.get('name');
         var email = formData.get('email');
         var number = formData.get('number');
-        var text = formData.get('message');
-
+ var message = formData.get('message')
         const filterNumber = /^[0-9]*$/; 
         const emailFilter = /^([\w-]+(?:\.[\w-]+))@((?:[\w-]+\.)\w[\w-]{0,66})\.([a-z]{2,66}(?:\.[a-z]{2})?)$/i;    
 
         console.log(name);
         console.log(email);
         console.log(number);
-        console.log(message);
+        
 
         // Metodo que valida ls input
         var validarName = function () {
@@ -170,10 +169,8 @@ $(document).ready(function ($) {
                // e.preventDefault();
             } // aca tendria que desaparecer la clase y mostrar el subensaje cuando los espacios esten vacios
 
-            if(!message){
-                document.querySelector('#mssg-text').classList.remove('hide');
 
-            }
+            
 
         };
 
