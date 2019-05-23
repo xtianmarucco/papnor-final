@@ -126,31 +126,35 @@ $(document).ready(function ($) {
 
 
     $(".form .btn[type='submit']").on("click", function () {
-        var formData = new FormData($('#form-contact')[0]);
+        var formData = new FormData($('#form-contact')[0]); //creo un objeto  para todos los datos del form
         var button = document.querySelector('#sent-alert');
         var text = document.createTextNode('Enviando')
 
-        var name = formData.get('name');
+        var name = formData.get('name'); //establesco variables  con los datos de los inputs  y les pongo nombre
         var email = formData.get('email');
         var number = formData.get('number');
- var message = formData.get('message')
+        var message = formData.get('message');
+
         const filterNumber = /^[0-9]*$/; 
         const emailFilter = /^([\w-]+(?:\.[\w-]+))@((?:[\w-]+\.)\w[\w-]{0,66})\.([a-z]{2,66}(?:\.[a-z]{2})?)$/i;    
 
         console.log(name);
-        console.log(email);
+        console.log(email); // aca testeo que estoy recibinedo de los input
         console.log(number);
-        
+        console.log(message); 
+        var flag = false;
 
-        // Metodo que valida ls input
+        
+        // Metodo que valida ls inputs 
         var validarName = function () {
-            if (!name) {
+            if (!name) {  // !negado no existe no se creo se le asigna vaor cero
                 // alert ("completar con un email valido"); 
                 //removeClass('hide')
                 // $( ".show-name" ).removeClass('hide');
 
                 // console.log('completa el campo')
                 document.querySelector('#name-text').classList.remove('hide');
+                flag = true; //ACA PREGUNO  A CADA INPUT SI ESTAN VACIOS PARA 
                 // nameFilter.test('#name-text')
                 //  alert ("completar con un nombre valido"); 
               //  e.preventDefault();
@@ -159,6 +163,7 @@ $(document).ready(function ($) {
             if (!emailFilter.test(email)) {
                 // alert ("completar con un email valido"); 
                 document.querySelector('#emailtext').classList.remove('hide');
+                flag = true;
                // e.preventDefault();
             }
 
@@ -166,17 +171,33 @@ $(document).ready(function ($) {
             if (!emailFilter.test(number)) {
                // alert("completar con un telefono valido");
                 document.querySelector('#number-text').classList.remove('hide');
+                flag = true;
                // e.preventDefault();
             } // aca tendria que desaparecer la clase y mostrar el subensaje cuando los espacios esten vacios
 
+            if (!message) {
+                // alert("completar con un telefono valido");
+                 document.querySelector('#mssg-text').classList.remove('hide');
+                 flag = true;
+                // e.preventDefault();
+             } // 
+
+             
 
             
 
         };
 
+        
+
         validarName();
-
-
+        
+         
+        // flag parte de true para ver si los inputs estan vacios y evitar mandar el mensaje en blanco 
+       
+        if (flag) {
+            return false
+        };
         button.classList.add('alert-info');
 
         button.appendChild(text)
