@@ -127,16 +127,22 @@ $(document).ready(function ($) {
 
     $(".form .btn[type='submit']").on("click", function () {
         var formData = new FormData($('#form-contact')[0]);
-        let button = document.querySelector('#sent-alert');
-        let text = document.createTextNode('Enviando')
+        var button = document.querySelector('#sent-alert');
+        var text = document.createTextNode('Enviando')
 
-        let name = formData.get('name');
-        let email = formData.get('email');
-        let number = formData.get('number');
-        
+        var name = formData.get('name');
+        var email = formData.get('email');
+        var number = formData.get('number');
+        var text = formData.get('message');
+
+        const filterNumber = /^[0-9]*$/; 
+        const emailFilter = /^([\w-]+(?:\.[\w-]+))@((?:[\w-]+\.)\w[\w-]{0,66})\.([a-z]{2,66}(?:\.[a-z]{2})?)$/i;    
+
         console.log(name);
         console.log(email);
         console.log(number);
+        console.log(message);
+
         // Metodo que valida ls input
         var validarName = function () {
             if (!name) {
@@ -146,23 +152,28 @@ $(document).ready(function ($) {
 
                 // console.log('completa el campo')
                 document.querySelector('#name-text').classList.remove('hide');
+                // nameFilter.test('#name-text')
                 //  alert ("completar con un nombre valido"); 
               //  e.preventDefault();
-            }
-            if (email == '') {
-                // alert ("completar con un email valido"); 
-              
 
+            }
+            if (!emailFilter.test(email)) {
+                // alert ("completar con un email valido"); 
                 document.querySelector('#emailtext').classList.remove('hide');
                // e.preventDefault();
-
             }
 
-            if (number == '') {
+
+            if (!emailFilter.test(number)) {
                // alert("completar con un telefono valido");
                 document.querySelector('#number-text').classList.remove('hide');
                // e.preventDefault();
             } // aca tendria que desaparecer la clase y mostrar el subensaje cuando los espacios esten vacios
+
+            if(!message){
+                document.querySelector('#mssg-text').classList.remove('hide');
+
+            }
 
         };
 
